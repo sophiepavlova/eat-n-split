@@ -30,5 +30,32 @@ export default function App() {
 }
 
 function FriendsList() {
-  return <ul>List</ul>;
+  const friends = initialFriends;
+  return (
+    <ul>
+      {friends.map((friend) => (
+        <Friend friend={friend} key={friend.id} />
+      ))}
+    </ul>
+  );
+}
+
+function Friend({ friend }) {
+  return (
+    <li>
+      <img src={friend.image}></img>
+      <h3>{friend.name}</h3>
+      <p
+        className={
+          friend.balance > 0 ? 'red' : friend.balance !== 0 ? 'green' : ''
+        }
+      >
+        {friend.balance > 0
+          ? `${friend.name} owes you ${friend.balance}$`
+          : friend.balance === 0
+            ? `You and ${friend.name} are even`
+            : `You owe ${friend.name} ${Math.abs(friend.balance)}$`}
+      </p>
+    </li>
+  );
 }
